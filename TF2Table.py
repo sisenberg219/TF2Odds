@@ -142,9 +142,10 @@ for i in range(len(dfs)):
                         else:
                             df2.at[row.Index,"Can_Be_Strange"] = "No"
                             df2.at[row.Index,"itemID"] = dict[i]['id']
-                     if row[1] == 'or an Exceedingly Rare Special Item!':
+                    if row[1] == 'or an Exceedingly Rare Special Item!':
                             df2.at[row.Index,"Can_Be_Strange"] = "No"
                             df2.at[row.Index,"itemID"] = '999999'
+        
         if crateName < 18:
             for row in df2.itertuples():
                 for i in range(len(dict)):
@@ -152,11 +153,11 @@ for i in range(len(dfs)):
                     df2.at[row.Index,"itemID"] = dict[i]['id']
                 if row[1] == 'or an Exceedingly Rare Special Item!':
                             df2.at[row.Index,"Can_Be_Strange"] = "No"
-                            df2.at[row.Index,"itemID"] = 999999   
+                            df2.at[row.Index,"itemID"] = 999999    
     
         df2.set_index('itemID', inplace=True)  
         df2.to_excel(writer, sheet_name=sheetName)
-        #df2.to_csv("foo.csv")
+        df2.to_csv(sheetName +".csv")
 
 writer.save()
 print("Jobs Done :D")
