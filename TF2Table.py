@@ -117,7 +117,6 @@ for i in range(len(dfs)):
         if crateName >= 82:
             for row in df2.itertuples():
                 for i in range(len(dict)):
-                    #if row[1] in dict[i]['name']:
                     if row[1] == dict[i]['name']:
                         if 'weapon' in dict[i]['type']:
                             df2.at[row.Index,"Can_Be_Strange"] = "Always"
@@ -125,12 +124,12 @@ for i in range(len(dfs)):
                         elif 'wearable' in dict[i]['type']:
                             df2.at[row.Index,"Can_Be_Strange"] = "Yes"
                             df2.at[row.Index,"itemID"] = dict[i]['id']
-                        elif dict[i]['name'] == 'or an Exceedingly Rare Special Item!':
-                            df2.at[row.Index,"Can_Be_Strange"] = "Yes"
-                            df2.at[row.Index,"itemID"] = '999999'
                         else:
                             df2.at[row.Index,"Can_Be_Strange"] = "No"
                             df2.at[row.Index,"itemID"] = dict[i]['id']
+                    if row[1] == 'or an Exceedingly Rare Special Item!':
+                            df2.at[row.Index,"Can_Be_Strange"] = "Yes"
+                            df2.at[row.Index,"itemID"] = '999999'
             
                             
         if crateName <= 81 and crateName >= 18:
@@ -140,21 +139,20 @@ for i in range(len(dfs)):
                         if 'weapon' in dict[i]['type']: 
                             df2.at[row.Index,"Can_Be_Strange"] = "Always"
                             df2.at[row.Index,"itemID"] = dict[i]['id']
-                        elif dict[i]['name'] == 'or an Exceedingly Rare Special Item!':
-                            df2.at[row.Index,"Can_Be_Strange"] = "No"
-                            df2.at[row.Index,"itemID"] = '999999'
                         else:
                             df2.at[row.Index,"Can_Be_Strange"] = "No"
                             df2.at[row.Index,"itemID"] = dict[i]['id']
-        
+                     if row[1] == 'or an Exceedingly Rare Special Item!':
+                            df2.at[row.Index,"Can_Be_Strange"] = "No"
+                            df2.at[row.Index,"itemID"] = '999999'
         if crateName < 18:
             for row in df2.itertuples():
                 for i in range(len(dict)):
                     df2.at[row.Index,"Can_Be_Strange"] = "No"
                     df2.at[row.Index,"itemID"] = dict[i]['id']
-                if dict[i]['name'] == 'or an Exceedingly Rare Special Item!':
+                if row[1] == 'or an Exceedingly Rare Special Item!':
                             df2.at[row.Index,"Can_Be_Strange"] = "No"
-                            df2.at[row.Index,"itemID"] = 999999    
+                            df2.at[row.Index,"itemID"] = 999999   
     
         df2.set_index('itemID', inplace=True)  
         df2.to_excel(writer, sheet_name=sheetName)
